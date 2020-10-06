@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "261493095949",
+    "firebase_url": "https://foraa-53c7c.firebaseio.com",
+    "project_id": "foraa-53c7c",
+    "storage_bucket": "foraa-53c7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261493095949:android:96ef6bcfa3737c1c859f44",
+        "android_client_info": {
+          "package_name": "com.example.foraa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261493095949-97qk03t44ps894p17qqlflicrgtrkrrv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM106ifGTjMZzYdN3r_vIgT9wgTUcBS-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261493095949-97qk03t44ps894p17qqlflicrgtrkrrv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
