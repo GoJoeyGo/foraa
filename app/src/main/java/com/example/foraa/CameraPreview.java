@@ -1,5 +1,6 @@
 package com.example.foraa;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.Camera;
 import android.view.SurfaceHolder;
@@ -7,6 +8,7 @@ import android.view.SurfaceView;
 
 import java.io.IOException;
 
+@SuppressLint("ViewConstructor")
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;
     private Camera mCamera;
@@ -19,8 +21,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // underlying surface is created and destroyed.
         mHolder = getHolder();
         mHolder.addCallback(this);
-        // deprecated setting, but required on Android versions prior to 3.0
-        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 
     public void surfaceCreated(SurfaceHolder holder) {

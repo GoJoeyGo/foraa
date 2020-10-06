@@ -4,11 +4,13 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraDevice;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -43,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
                 createCamPreview(camFlipFlop);
             }
         });
+        pictureButton = findViewById(R.id.pictureButton);
+        pictureButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mCamera.takePicture(null,null,null,null);
+            }
+        });
+
     }
 
     public void createCamPreview(int cam) {
