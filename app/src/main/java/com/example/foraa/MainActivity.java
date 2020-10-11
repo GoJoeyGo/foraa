@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.hardware.Camera;
 import android.hardware.camera2.*;
 import android.net.Uri;
@@ -32,6 +33,7 @@ import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
 import com.google.firebase.ml.vision.objects.FirebaseVisionObject;
 import com.google.firebase.ml.vision.objects.FirebaseVisionObjectDetector;
+import com.google.firebase.ml.vision.objects.FirebaseVisionObjectDetector;
 import com.google.firebase.ml.vision.objects.FirebaseVisionObjectDetectorOptions;
 
 import java.io.IOException;
@@ -52,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private CameraPreview mCameraPreview;
     String TAG = "TAG";
     int height=1;
-    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     private byte[] image;
     private static Bitmap photo = null;
     Bitmap cameraBitmap;
@@ -91,9 +92,20 @@ public class MainActivity extends AppCompatActivity {
              }
             }
         );
+        selectPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent c = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(c, 1);
+            }
+        });
     }
-
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        Bitmap imageBitmap = BitmapFactory.decodeByteArray(data.getByteArrayExtra());
+//        imageBitmap = RotateBitmap(imageBitmap,-90);
+//    }
+        static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView imageView;
     Bitmap imageBitmap;
     private static Uri mImageCaptureUri;
@@ -138,24 +150,17 @@ public class MainActivity extends AppCompatActivity {
             final FirebaseVisionObjectDetector objectDetector =
                     FirebaseVision.getInstance().getOnDeviceObjectDetector();
             FirebaseVisionImageLabeler foodLaberler = FirebaseVision.getInstance().getCloudImageLabeler();
+            Log.d(TAG, "cool");
             final TextView txtView = (TextView) findViewById(R.id.textView3);
-           objectDetector.processImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionObject>>(){
-                @Override
-                public void onSuccess(List<FirebaseVisionObject> firebaseVisionObjects) {
-                    for (FirebaseVisionObject object : firebaseVisionObjects) {
-                        if(object.getClassificationCategory()==3){
-                            Log.d(TAG, String.valueOf(object.getBoundingBox()));
-                        }
-                    }
-                    try {
-                        objectDetector.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+          objectDetector.processImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionObject>>(){
+               @Override
+               public void onSuccess(List<FirebaseVisionObject> firebaseVisionObjects) {
+                   for (FirebaseVisionObject object : firebaseVisionObjects) {
+                       Log.d(TAG, String.valueOf(object.getBoundingBox()));
+                   }
+               }
+           });
 //           foodLaberler.processImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
-//
 //                @Override
 //                public void onSuccess(List<FirebaseVisionImageLabel> firebaseVisionImageLabels) {
 //                    objectDetector.processImage(image);
@@ -170,8 +175,14 @@ public class MainActivity extends AppCompatActivity {
 //            });
         }
     };
-    public static void detctFood(Bitmap img){
 
+    //Was unable to Get Bounding from FirebaseVisionObjectDetectorOptions as it kept geting rejected but this is how it would work
+    public static int getobjectSubImage(Bitmap image,List<FirebaseVisionObject> firebaseVisionObjects){
+        for (FirebaseVisionObject object : firebaseVisionObjects) {
+            Rect rect = object.getBoundingBox();
+            Bitmap resultBmp = Bitmap.createBitmap(image,rect.left,rect.top,rect.right-rect.left, rect.bottom-rect.top);
+        }
+        return 1;
     }
     public static Bitmap RotateBitmap(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
