@@ -29,7 +29,9 @@
 
 ----
 # demonstration of forra working
-1. 
-2. 
-3. 
-4. 
+1. https://drive.google.com/file/d/1dNiArF12N5qbifa_7nbVe9hfZXkSc2yY/view?usp=sharing
+2. https://drive.google.com/file/d/1I69nV1YnrK6g2VgDQAE3Qi_7i1cbG_13/view?usp=sharing
+3. https://drive.google.com/drive/folders/1AIvt_TnA9FXdxYTzZNFWe-7ZRmm2js6d
+
+# Technical Discussion
+1. https://drive.google.com/drive/folders/1AIvt_TnA9FXdxYTzZNFWe-7ZRmm2js6d
