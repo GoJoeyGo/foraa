@@ -234,18 +234,22 @@ public class MainActivity extends AppCompatActivity {
                     for (FirebaseVisionImageLabel label : firebaseVisionImageLabels) {
                         Canvas canvas = new Canvas(image);
                         Log.d("Fruit ", label.getText() + " " + label.getConfidence());
-                        if (label.getText().equals("Banana")) {
+                        if (label.getText().contains("Banana")) {
                             drawLabel(canvas, rect, "Banana", banana, text);
+                            break;
                         } else if (label.getText().contains("Lemon")) {
                             drawLabel(canvas, rect, "Lemon", lemon, text);
+                            break;
                         } else if (label.getText().equals("Orange")) {
                             drawLabel(canvas, rect, "Orange", orange, text);
+                            break;
                         } else if (label.getText().equals("Granny smith")) {
                             drawLabel(canvas, rect, "Green Apple", greenApple, text);
+                            break;
                         } else if (label.getText().equals("Apple")) {
                             drawLabel(canvas, rect, "Red Apple", redApple, text);
+                            break;
                         }
-                        break;
                     }
                     Log.d("Exit", " ");
                     imageView.setImageBitmap(image);
